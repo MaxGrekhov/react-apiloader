@@ -21,15 +21,13 @@ export interface IHttpClientError {
 export interface IHttpClient {
   get<T>(
     url: string,
-    params?: unknown,
-    headers?: Record<string, string>,
+    params?: Record<string, unknown>,
     settings?: Record<string, unknown>,
   ): Promise<T>;
   post<T>(
     url: string,
     data?: unknown,
-    params?: unknown,
-    headers?: Record<string, string>,
+    params?: Record<string, unknown>,
     settings?: Record<string, unknown>,
   ): Promise<T>;
   cancel(): void;
