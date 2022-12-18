@@ -12,9 +12,7 @@ module.exports = {
     //promise
     'plugin:promise/recommended',
     //jsx
-    'plugin:jsx-a11y/recommended',
-    //prettier
-    'prettier',
+    'plugin:jsx-a11y/recommended'
   ],
   plugins: ['@typescript-eslint', 'import', 'jsx-a11y', 'react', 'react-hooks'],
   env: {

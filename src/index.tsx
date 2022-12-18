@@ -5,6 +5,7 @@ export type AppKey = string | number;
 export interface LoaderContextProviderProps<TClient, TError> {
   clientInterceptorHook?: ClientInterceptorHook<TError>;
   clientFactory: ClientFactory<TClient, TError>;
+  children?: React.ReactNode;
 }
 
 export type ClientAdapter<TError> = {
@@ -246,6 +247,32 @@ export const createLoaderApi = <TClient, TError>() => {
     return useHook;
   };
 
+  const createApiHookWithExternalState = <TState, TParams>(
+    promiseFactory: PromiseFactory<TState, TParams>,
+    useExternalState: () => readonly [TState, React.Dispatch<React.SetStateAction<TState>>],
+  ) => {
+    const apiHook = createApiHook(promiseFactory);
+    const useHook = () => {
+      // external state
+      const [state, setState] = useExternalState();
+      // api
+      const actionApi = apiHook();
+      // create main callback
+      const doApiCall = useCallback(
+        (params: TParams, mode: AppKey = ''): Promise<ApiCallResult<TState, TError>> => {
+          return actionApi(params, mode).then((apiCallResult) => {
+            if (apiCallResult.isSuccess) setState(apiCallResult.data);
+            return apiCallResult;
+          });
+        },
+        [actionApi, setState],
+      );
+      return [state, doApiCall, setState] as const;
+    };
+    useHook.id = apiHook.id;
+    return useHook;
+  };
+
   const LoaderContextProvider: React.FC<LoaderContextProviderProps<TClient, TError>> = ({
     children,
     clientInterceptorHook,
@@ -301,6 +328,7 @@ export const createLoaderApi = <TClient, TError>() => {
     useCancellation,
     createApiHook,
     createApiHookWithState,
+    createApiHookWithExternalState,
     LoaderContextProvider,
   } as const;
 };
