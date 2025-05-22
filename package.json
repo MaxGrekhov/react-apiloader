@@ -1,39 +1,44 @@
 {
   "name": "react-apiloader",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "lib/index.mjs",
   "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
-  "dependencies": {
-    "react": ">16.8"
+  "peerDependencies": {
+    "react": ">=19"
   },
   "devDependencies": {
-    "@types/react": ">16.8",
-    "@typescript-eslint/eslint-plugin": "5.46.1",
-    "@typescript-eslint/parser": "5.46.1",
+    "@eslint/js": "9.27.0",
+    "@rspack/cli": "1.3.11",
+    "@rspack/core": "1.3.11",
+    "@types/react": "19.1.4",
     "cross-env": "7.0.3",
-    "eslint": "8.30.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jsx-a11y": "6.6.1",
-    "eslint-plugin-promise": "6.1.1",
-    "eslint-plugin-react": "7.31.11",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "eslint-webpack-plugin": "3.2.0",
-    "prettier": "2.8.1",
-    "prettier-loader": "3.3.0",
-    "ts-loader": "9.4.2",
-    "typescript": "4.9.4",
-    "webpack": "5.75.0",
-    "webpack-bundle-analyzer": "4.7.0",
-    "webpack-cli": "5.0.1"
+    "eslint": "9.27.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-promise": "7.2.1",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-rspack-plugin": "4.2.1",
+    "prettier": "3.5.3",
+    "react": ">=19",
+    "ts-loader": "9.5.2",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.32.1"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack --watch --progress",
-    "build": "cross-env NODE_ENV=production webpack --progress",
-    "analyze": "cross-env NODE_ENV=production analyze=yes webpack --progress"
+    "dev": "cross-env NODE_ENV=development rspack --watch",
+    "build": "cross-env NODE_ENV=production rspack build",
+    "analyze": "cross-env NODE_ENV=production rspack build --analyze"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "bracketSameLine": true,
+    "printWidth": 100,
+    "endOfLine": "crlf"
   },
   "repository": {
     "type": "git",
