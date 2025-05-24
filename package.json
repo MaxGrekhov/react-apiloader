@@ -1,7 +1,7 @@
 {
   "name": "react-apiloader",
   "version": "3.0.0",
-  "description": "",
+  "description": "A lightweight, type-safe React library that abstracts API-related infrastructure code with centralized state management for API operations",
   "main": "lib/index.mjs",
   "types": "lib/index.d.ts",
   "files": [
